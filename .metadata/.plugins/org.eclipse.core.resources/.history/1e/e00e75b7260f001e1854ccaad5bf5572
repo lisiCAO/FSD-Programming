@@ -1,0 +1,37 @@
+package june16th;
+
+public class Q36 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Write a Java program that separates 0s on the left hand side and 1s on the right hand side from a random array of 0s and 1.");
+        int[] array = {0, 1, 0, 1, 0, 1, 0, 1, 0, 1};
+        separateZeroesOnes(array);
+        printArray(array);
+    }
+
+    static void separateZeroesOnes(int[] array) {
+        int left = 0;
+        int right = array.length - 1;
+        while (left < right) {
+            while (array[left] == 0 && left < right) {
+                left++;
+            }
+            while (array[right] == 1 && left < right) {
+                right--;
+            }
+            if (left < right) {
+                array[left] = 0;
+                array[right] = 1;
+                left++;
+                right--;
+            }
+        }
+    }
+
+    static void printArray(int[] array) {
+        for (int i : array) {
+            System.out.print(i + " ");
+        }
+    }
+}

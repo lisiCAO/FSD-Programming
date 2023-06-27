@@ -1,0 +1,12 @@
+package june16th;
+
+public class Q27 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Write a Java program to find the length of the longest consecutive elements sequence from an unsorted array of integers.");
+		System.out.println();
+		
+	}
+
+}
