@@ -7,8 +7,7 @@ public class Demo {
 		System.out.println("Here is the info : ");
 		System.out.println(v);
 		System.out.println("====================");
-		}
-	
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Vehicle v1 = new Vehicle() , v2 = new Vehicle(4,5000);
@@ -43,3 +42,5 @@ public class Demo {
 		ShowinfoVehicle(sc2);
 		ShowinfoVehicle(rc1);
 		ShowinfoVehicle(rc2);
+		}
+	}
