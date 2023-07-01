@@ -7,6 +7,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="&#x09;&#x09;ShowinfoVehicle(v1);"/>
 			<item value="&#x09;&#x09;Character.toLowerCase(0)"/>
 			<item value="System.out.println(&quot;enter the number of your array: &quot;);"/>
 		</list>
