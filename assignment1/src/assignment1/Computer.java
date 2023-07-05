@@ -24,7 +24,7 @@ class PasswordSystem {
 	public void inputPassword() {
 		password = null;
 		if (remainingAttempts == 0) {
-			System.out.println("You have reached the maximum attempts. \n");
+			System.out.println("You have reached the maximum attempts. \n---return to main menu.---");
 		} else {
 			System.out.println("Please enter your password: ");
 			password = Computer.kb.next();	
@@ -33,19 +33,19 @@ class PasswordSystem {
 
 	// method to validate password
 	public boolean validatePassword() {
-			if (password.equals(PASSWORD)) {
-				return true;
+		if(remainingAttempts == 0) {
+			return false;
+		}	
+		if (password.equals(PASSWORD)) {
+			return true;
 			} else {
-				if(remainingAttempts == 0) {
-					return false;
-				}
 				remainingAttempts--;
 				System.out.println("Incorrect password. You have " + remainingAttempts + " attempt(s) left.");
-				while(remainingAttempts > 0) {
+				if(remainingAttempts > 0) {
 				inputPassword();
 				this.validatePassword();
 				}
-			}	return false;
+			}return false;
 		}
 	}
 
@@ -205,14 +205,22 @@ public class Computer {
 	
 	//method to validate the input index
 	public static int getValidIndexOfComputer(Computer[] inventory) {
-		char option;
-		boolean running = true;
+
 			int indexOfComputer = kb.nextInt();
+			
 		while (indexOfComputer >= inventory.length || indexOfComputer < 0 ) {
 			System.out.println("Please re-enter a valid index (between 0 to " + inventory.length + ")");
-			indexOfComputer = kb.nextInt();}
+			indexOfComputer = kb.nextInt();
+			}
+		return indexOfComputer;}
+		
+		public static int indexWithInformation(Computer[] inventory) {
+			char option;
+			boolean running = true;
+			int index = getValidIndexOfComputer(inventory);
+			
 		// solution to null position,choose a new position or return to main menu
-		while(running && inventory[indexOfComputer] == null){
+		while(running && inventory[index] == null){
 			System.out.println(
 					"There is no Computer information in this index position.");
 			System.out.println("Would you like to enter a new computer number? yes / no");
@@ -220,20 +228,17 @@ public class Computer {
 			switch (option) {
 			case 'y': 
 				System.out.println("Please enter the new computer number that you want to update:");
-				indexOfComputer = kb.nextInt();		
-				while (indexOfComputer >= inventory.length || indexOfComputer < 0 ) {
-					System.out.println("Please re-enter a valid index (between 0 to " + inventory.length + ")");
-					indexOfComputer = kb.nextInt();}
+				getValidIndexOfComputer(inventory);
 				break;
 			case 'n':				
-				indexOfComputer = -1;
+				index = -1;
 				running =false;
 				break;			
 			default:
 				System.out.println("ERROR! INVALID ENTRY!");
 				continue;
 			}
-		}return indexOfComputer;
+		}return index;
 	}
 
 	// method to display computers by Brand selected
@@ -330,8 +335,8 @@ public class Computer {
 					boolean running;
 					int index;
 					
-					if(getValidIndexOfComputer(inventory) != -1) {
-					index = getValidIndexOfComputer(inventory);
+					if(indexWithInformation(inventory) != -1) {
+					index = indexWithInformation(inventory);
 					// execute update menu until exit
 					running = true;
 					}else {
