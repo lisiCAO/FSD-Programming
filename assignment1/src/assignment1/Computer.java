@@ -22,8 +22,9 @@ class PasswordSystem {
 
 	// method to prompt user for password
 	public void inputPassword() {
+		password = null;
 		if (remainingAttempts == 0) {
-			System.out.println("You have reached the maximum attempts. \n");
+			System.out.println("You have reached the maximum attempts. \n---return to main menu.---");
 		} else {
 			System.out.println("Please enter your password: ");
 			password = Computer.kb.next();
@@ -32,16 +33,16 @@ class PasswordSystem {
 
 	// method to validate password
 	public boolean validatePassword() {
+
 		while (remainingAttempts > 0) {
+			remainingAttempts--;
 			if (password.equals(PASSWORD)) {
 				return true;
 			} else {
-				remainingAttempts--;
 				System.out.println("Incorrect password. You have " + remainingAttempts + " attempt(s) left.");
 				inputPassword();
 			}
 		}
-		Computer.printMainMenu();
 		return false;
 	}
 }
@@ -197,19 +198,65 @@ public class Computer {
 				numOfComputerAdded--;
 			}
 		}
+		System.out.println("Information of computers have been added. \n Return to main menu.");
+	}
+
+	// method to validate the input index
+	public static int getValidIndexOfComputer(Computer[] inventory) {
+
+		int indexOfComputer = kb.nextInt();
+
+		while (indexOfComputer >= inventory.length || indexOfComputer < 0) {
+			System.out.println("Please re-enter a valid index (between 0 to " + inventory.length + ")");
+			indexOfComputer = kb.nextInt();
+		}
+		return indexOfComputer;
+	}
+
+	public static int indexWithInformation(Computer[] inventory) {
+		char option;
+		boolean running = true;
+		int index = getValidIndexOfComputer(inventory);
+
+		// solution to null position,choose a new position or return to main menu
+		while (running && inventory[index] == null) {
+			System.out.println("There is no Computer information in this index position.");
+			System.out.println("Would you like to enter a new computer number? yes / no");
+			option = kb.next().toLowerCase().charAt(0);// unify the option
+			switch (option) {
+			case 'y':
+				System.out.println("Please enter the new computer number that you want to update:");
+				getValidIndexOfComputer(inventory);
+				break;
+			case 'n':
+				index = -1;
+				running = false;
+				break;
+			default:
+				System.out.println("ERROR! INVALID ENTRY!");
+				continue;
+			}
+		}
+		return index;
 	}
 
 	// method to display computers by Brand selected
 	public static void findComputersBy(String br, Computer[] inventory) {
 		String other = br.toLowerCase();
 		boolean found = false;
+		boolean foundBrand = false;
+		br.toLowerCase();
 		for (int i = 0; i < inventory.length; i++) {
 			if (inventory[i] != null) {
 				if (inventory[i].getBrand().toLowerCase().equals(other)) {
 					System.out.println(inventory[i].toString(i) + "\n");
 					found = true;
+					foundBrand = true;
 				}
 			}
+		}
+		if (!foundBrand) {
+			System.out.println("There is no such brand of computers.");
 		}
 		if (!found) {
 			System.out.println("There is no computer with the brand: " + br + "\n");
@@ -224,8 +271,12 @@ public class Computer {
 				if (Double.compare(inventory[i].getPrice(), pr) == -1) {
 					System.out.println(inventory[i].toString(i) + "\n");
 					found = true;
+					found = true;
 				}
 			}
+		}
+		if (!found) {
+			System.out.println("There is no computers under " + pr + " $ .");
 		}
 		if (!found) {
 			System.out.println("There is no computer under the price: " + pr + "\n");
@@ -246,14 +297,14 @@ public class Computer {
 		// prompt the store owner for the max number of computers the store can contain.
 		System.out.println("Please enter the maximum number of computers that your store can contain:");
 		int maxComputers = kb.nextInt();
-		Computer[] inventory = new Computer[maxComputers]; // create an array - inventory - with the size of inventory
+		Computer[] inventory = new Computer[maxComputers]; // create an array - inventory - with the size of
+															// inventory
 		System.out.println("Maximum number of computers: " + maxComputers + "\n");// confirm the information
-
-		// display main menu and prompt user for the choice.
-		printMainMenu();
 
 		// build 5 options.
 		while (true) {
+			// display main menu and prompt user for the choice.
+			printMainMenu();
 			switch (userChoiceForMainMenu) {
 			case 1: // check password validity
 				checkPassword.inputPassword();
@@ -280,6 +331,8 @@ public class Computer {
 						System.out.println("You can add " + numOfComputerAdded + " computers.");
 					}
 					addComputer(numOfComputerAdded, inventory); // add information of computer
+					// add information of computer
+					addComputer(numOfComputerAdded, inventory);
 					break;
 				}
 			case 2: // update attributes of computers
@@ -315,38 +368,58 @@ public class Computer {
 					}
 					// print computer's information when index is valid
 					System.out.println(inventory[indexOfComputer].toString(indexOfComputer) + "\n");
-					// execute update menu until exit
-					printUpdateMenu();
-					boolean running = true;
+					// get valid index
+
+					boolean running;
+					int index;
+
+					if (indexWithInformation(inventory) != -1) {
+						index = indexWithInformation(inventory);
+						// execute update menu until exit
+						running = true;
+					} else {
+						running = false;
+						break;
+					}
+
 					while (running) {
+						System.out.println(inventory[index].toString(index) + "\n");// print computer's information
+																					// when index is valid
+						printUpdateMenu();
 						switch (userChoiceForUpdateMenu) {
 						case 1:// update brand
 							System.out.println("Enter the new brand");
 							String br = kb.next();
 							inventory[indexOfComputer].setBrand(br);
 							System.out.println(inventory[indexOfComputer].toString(indexOfComputer) + "\n");
+							inventory[index].setBrand(br);
 							break;
 						case 2:// update model
 							System.out.println("Enter the new model");
 							String md = kb.next();
 							inventory[indexOfComputer].setBrand(md);
 							System.out.println(inventory[indexOfComputer].toString(indexOfComputer) + "\n");
+							inventory[index].setBrand(md);
 							break;
 						case 3:// update serial number
 							System.out.println("Enter the new SN");
 							long sN = kb.nextLong();
 							inventory[indexOfComputer].setSN(sN);
 							System.out.println(inventory[indexOfComputer].toString(indexOfComputer) + "\n");
+							inventory[index].setSN(sN);
 							break;
 						case 4:// update price
 							System.out.println("Enter the new price");
 							double pr = kb.nextDouble();
+
 							inventory[indexOfComputer].setPrice(pr);
 							System.out.println(inventory[indexOfComputer].toString(indexOfComputer) + "\n");
+							inventory[index].setPrice(pr);
+
 							break;
 						case 5:// return to main menu
 							System.out.println("Return to Main Menu");
-							running = false;
+							running = false; // change the condition of while loop
 							break;
 						default:// validate choice entry
 							System.out.println("INVALID ENTRY.\n");
@@ -355,7 +428,7 @@ public class Computer {
 						printUpdateMenu();
 					}
 				}
-				break;
+				break;// exit while(running) loop
 			case 3: // prompt user for brand name and find computer by brand
 				System.out.println("Please enter the BRAND of computer that you would like to search:");
 				String br = kb.next();
@@ -375,7 +448,6 @@ public class Computer {
 			default:// validate the choice that users enter
 				System.out.println("INVALID ENTRY.\n");
 			}
-			printMainMenu();
 		}
 	}
 }
