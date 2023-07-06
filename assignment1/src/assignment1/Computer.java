@@ -3,7 +3,7 @@
 //© Lisi Cao
 //Written by: Lisi Cao 2387145
 //_______________________________________________________
-
+//This is a Computer inventory system, help store owner edit and track the information of computer in stock
 package assignment1;
 
 import java.util.Objects;
@@ -27,7 +27,6 @@ class PasswordSystem {
 		} else {
 			System.out.println("Please enter your password: ");
 			password = Computer.kb.next();
-			remainingAttempts--;
 		}
 	}
 
@@ -37,6 +36,7 @@ class PasswordSystem {
 			if (password.equals(PASSWORD)) {
 				return true;
 			} else {
+				remainingAttempts--;
 				System.out.println("Incorrect password. You have " + remainingAttempts + " attempt(s) left.");
 				inputPassword();
 			}
@@ -72,6 +72,15 @@ public class Computer {
 		this.model = md;
 		this.price = pr;
 		this.sN = sN;
+		numOfCreatedComputers++;
+	}
+
+	// copy constructor
+	public Computer(Computer c) {
+		this.brand = c.brand;
+		this.model = c.model;
+		this.price = c.price;
+		this.sN = c.sN;
 		numOfCreatedComputers++;
 	}
 
@@ -192,24 +201,34 @@ public class Computer {
 
 	// method to display computers by Brand selected
 	public static void findComputersBy(String br, Computer[] inventory) {
-		br.toLowerCase();
+		String other = br.toLowerCase();
+		boolean found = false;
 		for (int i = 0; i < inventory.length; i++) {
 			if (inventory[i] != null) {
-				if (inventory[i].getBrand().toLowerCase().equals(br)) {
+				if (inventory[i].getBrand().toLowerCase().equals(other)) {
 					System.out.println(inventory[i].toString(i) + "\n");
+					found = true;
 				}
 			}
+		}
+		if (!found) {
+			System.out.println("There is no computer with the brand: " + br + "\n");
 		}
 	}
 
 	// method to display computers cheaper than input price
 	public static void findCheaperThan(double pr, Computer[] inventory) {
+		boolean found = false;
 		for (int i = 0; i < inventory.length; i++) {
 			if (inventory[i] != null) {
 				if (Double.compare(inventory[i].getPrice(), pr) == -1) {
 					System.out.println(inventory[i].toString(i) + "\n");
+					found = true;
 				}
 			}
+		}
+		if (!found) {
+			System.out.println("There is no computer under the price: " + pr + "\n");
 		}
 	}
 
@@ -240,12 +259,10 @@ public class Computer {
 				checkPassword.inputPassword();
 				if (!checkPassword.validatePassword()) {
 					continue;
-
 					// prompt user for numbers of computer to add
 				} else {
 					System.out.println("How many computers do you want to add? ");
 					int numOfComputerAdded = kb.nextInt();
-
 					// check availability of empty space
 					int emptyCount = 0;
 					for (int i = 0; i < inventory.length; i++) {
@@ -253,27 +270,23 @@ public class Computer {
 							emptyCount++;
 						}
 					}
+					// compare empty space and numbers to be added
 					if (emptyCount < numOfComputerAdded) {
 						System.out.println(
 								"Only " + emptyCount + " empty space left in the inventory, and you can only add"
 										+ emptyCount + " computers.");
 						numOfComputerAdded = emptyCount;
-
-						// add information of computer
-						addComputer(numOfComputerAdded, inventory);
 					} else {
-						System.out.println("and you can only add " + emptyCount + " computers.");
-						addComputer(numOfComputerAdded, inventory);
+						System.out.println("You can add " + numOfComputerAdded + " computers.");
 					}
+					addComputer(numOfComputerAdded, inventory); // add information of computer
 					break;
 				}
 			case 2: // update attributes of computers
 				checkPassword.inputPassword(); // input password
-
 				// validate password
 				if (!checkPassword.validatePassword()) {
 					continue;
-
 				} else {
 					// prompt user for the index of computer to update
 					System.out.println("Please enter the computer number that you want to update:");
@@ -284,7 +297,6 @@ public class Computer {
 						System.out.println("Please re-enter a valid index (between 0 to " + maxComputers);
 						indexOfComputer = kb.nextInt();
 					}
-
 					// solution to null position,choose a new position or return to main menu
 					while (inventory[indexOfComputer] == null) {
 						System.out.println(
@@ -313,28 +325,24 @@ public class Computer {
 							String br = kb.next();
 							inventory[indexOfComputer].setBrand(br);
 							System.out.println(inventory[indexOfComputer].toString(indexOfComputer) + "\n");
-							printUpdateMenu();
 							break;
 						case 2:// update model
 							System.out.println("Enter the new model");
 							String md = kb.next();
 							inventory[indexOfComputer].setBrand(md);
 							System.out.println(inventory[indexOfComputer].toString(indexOfComputer) + "\n");
-							printUpdateMenu();
 							break;
 						case 3:// update serial number
 							System.out.println("Enter the new SN");
 							long sN = kb.nextLong();
 							inventory[indexOfComputer].setSN(sN);
 							System.out.println(inventory[indexOfComputer].toString(indexOfComputer) + "\n");
-							printUpdateMenu();
 							break;
 						case 4:// update price
 							System.out.println("Enter the new price");
 							double pr = kb.nextDouble();
 							inventory[indexOfComputer].setPrice(pr);
 							System.out.println(inventory[indexOfComputer].toString(indexOfComputer) + "\n");
-							printUpdateMenu();
 							break;
 						case 5:// return to main menu
 							System.out.println("Return to Main Menu");
@@ -342,9 +350,9 @@ public class Computer {
 							break;
 						default:// validate choice entry
 							System.out.println("INVALID ENTRY.\n");
-							printUpdateMenu();
 							break;
 						}
+						printUpdateMenu();
 					}
 				}
 				break;
@@ -360,7 +368,7 @@ public class Computer {
 				findCheaperThan(pr, inventory);
 				break;
 			case 5:// closing message and exit
-				System.out.println("System is closing. Thanks for using Computer System!");
+				System.out.println("System closed. Thanks for using Computer System!");
 				kb.close();
 				System.exit(0);
 				break;
