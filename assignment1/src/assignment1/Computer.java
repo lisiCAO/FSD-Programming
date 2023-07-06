@@ -31,23 +31,20 @@ class PasswordSystem {
 		}
 	}
 
+
 	// method to validate password
 	public boolean validatePassword() {
-		if(remainingAttempts == 0) {
-			return false;
-		}	
+		while(remainingAttempts > 0) {
 		if (password.equals(PASSWORD)) {
 			return true;
-			} else {
+			}else {
 				remainingAttempts--;
 				System.out.println("Incorrect password. You have " + remainingAttempts + " attempt(s) left.");
-				if(remainingAttempts > 0) {
 				inputPassword();
-				this.validatePassword();
-				}
-			}return false;
-		}
+			}
+		}return false;
 	}
+}
 
 //Computer class
 public class Computer {

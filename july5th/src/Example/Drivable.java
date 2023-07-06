@@ -1,5 +1,7 @@
 package Example;
 
-public class Drivable {
+public interface Drivable {
+	void accelerate();
+	void brake();
 
 }
