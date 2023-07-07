@@ -2,24 +2,22 @@ package Part1;
 
 public class Cow extends Animal{
 
-	@Override
-	boolean isMammal() {
-		// TODO Auto-generated method stub
-		return false;
+	public Cow(boolean isMammal, boolean isCarvorous) {
+		super(isMammal, isCarvorous);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	boolean isCarnivorous() {
+	public String getGreeting() {
 		// TODO Auto-generated method stub
-		return false;
+		return "moo";
 	}
 
 	@Override
-	public void Animal() {
+	public String describe() {
 		// TODO Auto-generated method stub
-		
+		return "A cow says '" + getGreeting() + "', is " + (getIsCarvorous() ? "": "not")  + " carnivorous, and is " + (getIsMammal() ? "" : " not") + " a mammal.";
 	}
-	
 	
 	
 
