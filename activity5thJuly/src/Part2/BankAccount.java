@@ -1,10 +1,13 @@
 package Part2;
 
+
 public class BankAccount {
+
 	private String name; // your name
 	private double balance; // current amount of money you save in the bank account
 	private final static double depositLimit = 500;
 	private final static double withdrawLimit = 500;
+
 	
 	/** constructor */
 	public BankAccount(String name, double balance) {
@@ -55,13 +58,4 @@ public class BankAccount {
 			balance -= withdrawAmount;
 		}
 	}
-
-
-
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

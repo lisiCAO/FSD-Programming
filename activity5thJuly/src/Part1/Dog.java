@@ -1,9 +1,9 @@
 package Part1;
 
+
 public class Dog extends Animal{
 	public Dog(boolean isMammal, boolean isCarnivorous) {
-		super(isMammal, isCarnivorous);
-	}
+		super(isMammal, isCarnivorous);}
 
 	@Override
 	public String getGreeting() {
@@ -15,5 +15,5 @@ public class Dog extends Animal{
 		// TODO Auto-generated method stub
 		return "A dog says '" + getGreeting() + "', is " + (getIsCarvorous() ? "": "not")  + " carnivorous, and is " + (getIsMammal() ? "" : " not") + " a mammal.";
 	}
+	}
 
-}

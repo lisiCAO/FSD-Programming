@@ -1,10 +1,8 @@
 package Part1;
 
-public class Cow extends Animal{
-
-	public Cow(boolean isMammal, boolean isCarvorous) {
-		super(isMammal, isCarvorous);
-		// TODO Auto-generated constructor stub
+public class Cow extends Animal {
+	public Cow(boolean isMammal, boolean isCarnivorous) {
+		super(isMammal, isCarnivorous);
 	}
 
 	@Override
@@ -18,7 +16,5 @@ public class Cow extends Animal{
 		// TODO Auto-generated method stub
 		return "A cow says '" + getGreeting() + "', is " + (getIsCarvorous() ? "": "not")  + " carnivorous, and is " + (getIsMammal() ? "" : " not") + " a mammal.";
 	}
-	
-	
+	}
 
-}

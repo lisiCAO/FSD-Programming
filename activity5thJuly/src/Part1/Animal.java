@@ -19,6 +19,7 @@ public abstract class Animal {
 	public abstract String getGreeting();
 	public abstract String describe();
 	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -31,8 +32,6 @@ public abstract class Animal {
 		System.out.println(cow.describe());
 		System.out.println(duck.describe());
 		
-		
-
 	}
 
 }
