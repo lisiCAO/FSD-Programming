@@ -135,15 +135,16 @@ class Dice {
 		this.resultDice = 0;
 	}
 
-	public void startDice(String playerName) {
+	public void startDice(Player player) {
 		System.out.println("------------------------------------");
-		System.out.println("Player <<<  " + playerName + "  >>>");
+		System.out.println("Player <<<  " + player.getName() + "  >>>");
 		System.out.println("Click start to flip dice");
 		System.out.println("Enter any key to start:");
 
 		Scanner kb = new Scanner(System.in);
 
-		kb.nextLine();
+		String input = kb.nextLine();
+
 	}
 
 	public int roll() {
@@ -277,14 +278,12 @@ class GameBoard {
 }
 
 public class LadderAndSnake {
-	private ArrayList<Player> players = new ArrayList<>();
+	private ArrayList<Player> players;
 	private GameBoard board;
-	private Dice dice = new Dice();
+	private Dice dice;
 
-	public LadderAndSnake(int numOfPlayers, String[] playerNames) {
-		for (int i = 0; i < numOfPlayers; i++) {
-			players.add(new Player(playerNames[i]));
-		}
+	public LadderAndSnake(ArrayList<Player> players) {
+		this.players = players;
 		this.board = new GameBoard();
 		this.dice = new Dice();
 	}
@@ -300,7 +299,7 @@ public class LadderAndSnake {
 		Map<Integer, List<Player>> diceResultToPlayers = new TreeMap<>(Collections.reverseOrder());
 
 		for (Player player : players) {
-			dice.startDice(player.getName());
+			dice.startDice(player);
 			int diceResult = dice.roll();
 			System.out.println(dice);
 			if (!diceResultToPlayers.containsKey(diceResult)) {
@@ -326,7 +325,7 @@ public class LadderAndSnake {
 				diceResultToPlayers.remove(diceResult);
 
 				for (Player player : tiedPlayers) {
-					dice.startDice(player.getName());
+					dice.startDice(player);
 					int newDiceResult = dice.roll();
 					System.out.println(dice);
 					if (!diceResultToPlayers.containsKey(newDiceResult)) {
@@ -358,10 +357,11 @@ public class LadderAndSnake {
 					isGameOver = true;
 					break;
 				} else {
-					dice.startDice(player.getName());
+					dice.startDice(player);
 					int sptes = dice.roll();
 					System.out.println(dice);
 					player.move(sptes, board);
+					player.saveGameState();
 					position.put(player.getPosition(), player.getName());
 				}
 			}
@@ -384,8 +384,22 @@ public class LadderAndSnake {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		String input;
 		Scanner kb = new Scanner(System.in);
 		System.out.println("Welcome to  play \" Ladder and Snake \" created by Lisi Cao.");
+		ArrayList<Player> players = new ArrayList<>();
+//		System.out.println("Do you want to load your game? yes or no");
+//		 input = kb.nextLine();
+//		 if(input.equalsIgnoreCase("yes")) {
+//			 System.out.print("Please enter your Player Name: ");
+//			 String loadedPlayerName = kb.nextLine();
+//			 Player loadedPlayer = Player.loadingGameState(loadedPlayerName);
+//			 if(Player.loadingGameState(loadedPlayerName) != null) {
+//				 players.add(loadedPlayer);
+//			 };
+//		 }
+		
+		
 		System.out.println("How many players do you have? - Number must be between 2 and 4 inclusively");
 		int numOfPlayer = kb.nextInt();
 		int n = 4;
@@ -410,20 +424,23 @@ public class LadderAndSnake {
 
 		kb.nextLine();
 		String[] playerNames;
+
 		playerNames = new String[numOfPlayer];
-		System.out.println("Please enter names of player.");
 
 		for (int i = 0; i < numOfPlayer; i++) {
 			System.out.println("The name of player #" + (i + 1) + ": ");
-			playerNames[i] = kb.nextLine();
+				 input = kb.nextLine();
+				playerNames[i] = input;
+				players.add(new Player(playerNames[i]));
 		}
+
 		System.out.println("The following " + numOfPlayer + " Players attend this game:");
-		for (String playerName : playerNames) {
-			System.out.println(playerName);
+		for (Player player : players) {
+			System.out.println(player.getName());
 		}
 
 		System.out.println("\nGame is loading \n");
-		LadderAndSnake game = new LadderAndSnake(numOfPlayer, playerNames);
+		LadderAndSnake game = new LadderAndSnake(players);
 
 		System.out.println("Please flip Dice to determine players' order!\n");
 		game.orderPlayers();
