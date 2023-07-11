@@ -20,7 +20,7 @@ class Player implements Serializable {
 	public Player(String name) {
 		this.name = name;
 		this.position = 0;
-		this.id = ++numPlayerCreated;
+		this.id = ++numPlayerCreated; // index for future features
 	}
 
 	/**
@@ -76,6 +76,7 @@ class Player implements Serializable {
 		return position;
 	}
 
+	// move method
 	public void move(int sptes, GameBoard board) {
 		int newPosition;
 
@@ -105,22 +106,24 @@ class Player implements Serializable {
 		System.out.println("You arrive: " + position + "\n");
 	}
 
+	// save player's game state
 	public void saveGameState() {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(getName() + ".dat"))) {
 			out.writeObject(this);
-			System.out.println("Game sate saved for player " + getName());
+			System.out.println("Game sate saved for player " + getName() + "\n");
 		} catch (IOException e) {
 			System.out.println("Error!");
 			e.printStackTrace();
 		}
 	}
 
+	// load previous game
 	public static Player loadingGameState(String playerName) {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(playerName + ".dat"))) {
 			return (Player) in.readObject();
 		} catch (IOException | ClassNotFoundException e) {
 			System.out.println("Error!");
-			e.printStackTrace();
+			e.printStackTrace(); // indicate error lines
 		}
 		return null;
 	}
@@ -138,19 +141,15 @@ class Dice {
 	public void startDice(Player player) {
 		System.out.println("------------------------------------");
 		System.out.println("Player <<<  " + player.getName() + "  >>>");
-		System.out.println("Click start to flip dice");
-		System.out.println("Enter any key to start:");
-
-		Scanner kb = new Scanner(System.in);
-
-		String input = kb.nextLine();
-
+		System.out.println("Click start to flip dice. (enter any key to start)");
+		Scanner kb = new Scanner(System.in); // pretend there is a bottom "Start"
+		kb.nextLine();
 	}
 
 	public int roll() {
 		Random rand = new Random();
 		resultDice = rand.nextInt(6) + 1;
-		return resultDice;
+		return resultDice; // return random number of Dice
 	}
 
 	@Override
@@ -173,6 +172,7 @@ class GameBoard {
 		this.boardString = new String[10][10];
 		int n = 100;
 
+		// create digit game board(INTEGER)
 		for (int i = 0; i < 10; i++) {
 			if (i % 2 == 0) {
 				for (int j = 0; j < 10; j++) {
@@ -184,12 +184,15 @@ class GameBoard {
 				}
 			}
 		}
+
+		// display a game board(STRING)
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				boardString[i][j] = String.valueOf(boardNum[i][j]);
 			}
 		}
 
+		// assign values to snakes
 		snakes.put(16, 6);
 		snakes.put(48, 30);
 		snakes.put(64, 60);
@@ -199,6 +202,7 @@ class GameBoard {
 		snakes.put(97, 76);
 		snakes.put(98, 78);
 
+		// assign values to ladders
 		ladders.put(1, 38);
 		ladders.put(4, 14);
 		ladders.put(9, 31);
@@ -266,6 +270,7 @@ class GameBoard {
 		this.boardString = boardString;
 	}
 
+	// check whether snakes or ladders exist according to current position
 	public HashMap<Integer, Integer> getSnakeAndLadders(int position) {
 		if (snakes.containsKey(position)) {
 			return snakes;
@@ -277,11 +282,14 @@ class GameBoard {
 	}
 }
 
+//  core engine. initial game.
 public class LadderAndSnake {
 	private ArrayList<Player> players;
 	private GameBoard board;
 	private Dice dice;
+	Scanner kb = new Scanner(System.in);
 
+	// import players to constructor
 	public LadderAndSnake(ArrayList<Player> players) {
 		this.players = players;
 		this.board = new GameBoard();
@@ -295,6 +303,22 @@ public class LadderAndSnake {
 		return players;
 	}
 
+	/**
+	 * @param players the players to set
+	 */
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
+
+	/*
+	 * This part is to determine the order of players. The basic logic is as follow:
+	 * First round 1. determine player's relative position, put them in a list. 2.
+	 * players who have same values will be treated as a set, which has a unique
+	 * position. Second round 1. players with same values re-flip dice to determine
+	 * the position within them ,that means in the second list. 2. sort the second
+	 * list. 3. put second list back to main list 4. repeat this process until all
+	 * list has only one element. return the ordered list
+	 */
 	public void orderPlayers() {
 		Map<Integer, List<Player>> diceResultToPlayers = new TreeMap<>(Collections.reverseOrder());
 
@@ -344,28 +368,51 @@ public class LadderAndSnake {
 		players = orderedPlayers;
 	}
 
+	// this is a method under core engine
 	public void play() {
-		boolean isGameOver = false;
-		int count = 0;
 		HashMap<Integer, String> position = new HashMap<>();
-		int[][] originalBoardNum = board.getBoardNum();
+		int[][] originalBoardNum = board.getBoardNum(); // create a original board to initial game board
+		boolean isGameOver = false;// flag
+		int count = 0;
+
+		// flag will turn over once there is one player reach 100.
 		while (!isGameOver) {
 			count++;
-			System.out.println("------------------------------------\nRound # " + count);
+			System.out.println("------------------------------------\nRound # " + count); // counting game round
 			for (Player player : players) {
 				if (player.getPosition() == 100) {
 					isGameOver = true;
 					break;
+
 				} else {
 					dice.startDice(player);
 					int sptes = dice.roll();
 					System.out.println(dice);
 					player.move(sptes, board);
-					player.saveGameState();
+
+					// every fifth round, ask player whether save game state or not.
+					if (count % 5 == 0) {
+						System.out.println(
+								"Do you want to save game state? enter '-1'to save, or any other key to continue.");
+						String isSave = kb.nextLine();
+						if (isSave.equals("-1")) { // for easy use. enter -1 to save, other key to continue.
+							player.saveGameState(); // display saving status.
+							System.out.println("Do you want to exit game? Please enter 'END' EXACTLY.");
+							String end = kb.nextLine();
+							if (end.equals("END")) {
+								System.exit(0);
+							}
+						} else {
+							System.out.println("Continue. \n");
+						}
+					}
+
 					position.put(player.getPosition(), player.getName());
 				}
 			}
 
+			// display where players are within the game board by showing player's initial
+			// letter. The last player will take the position
 			for (int i = 0; i < 10; i++) {
 				for (int j = 0; j < 10; j++) {
 					int valBoard = Integer.parseInt(board.getBoardString()[i][j]);
@@ -377,85 +424,10 @@ public class LadderAndSnake {
 				}
 				System.out.println();
 			}
+			// when player's position move, the previous position return to original board
 			board.setBoardNum(originalBoardNum);
 			position.clear();
 		}
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		String input;
-		Scanner kb = new Scanner(System.in);
-		System.out.println("Welcome to  play \" Ladder and Snake \" created by Lisi Cao.");
-		ArrayList<Player> players = new ArrayList<>();
-//		System.out.println("Do you want to load your game? yes or no");
-//		 input = kb.nextLine();
-//		 if(input.equalsIgnoreCase("yes")) {
-//			 System.out.print("Please enter your Player Name: ");
-//			 String loadedPlayerName = kb.nextLine();
-//			 Player loadedPlayer = Player.loadingGameState(loadedPlayerName);
-//			 if(Player.loadingGameState(loadedPlayerName) != null) {
-//				 players.add(loadedPlayer);
-//			 };
-//		 }
-		
-		
-		System.out.println("How many players do you have? - Number must be between 2 and 4 inclusively");
-		int numOfPlayer = kb.nextInt();
-		int n = 4;
-
-		while (n > 0 && numOfPlayer > 4 || numOfPlayer < 2) {
-			n--;
-
-			if (n > 1) {
-				System.out.println("Bad Attempt " + (4 - n)
-						+ "- Invalid # of players. please enter a # BETWEEN 2 and 4 inclusively");
-				numOfPlayer = kb.nextInt();
-			} else if (n == 1) {
-				System.out.println("Bad Attempt " + (4 - n)
-						+ "- Invalid # of players. please enter a # BETWEEN 2 and 4 inclusively This is your last attempts");
-				numOfPlayer = kb.nextInt();
-			} else {
-				System.out.println(
-						"Bad Attempt " + (4 - n) + "! You have exhausted all your chances. Program will terminate");
-				System.exit(0);
-			}
-		}
-
-		kb.nextLine();
-		String[] playerNames;
-
-		playerNames = new String[numOfPlayer];
-
-		for (int i = 0; i < numOfPlayer; i++) {
-			System.out.println("The name of player #" + (i + 1) + ": ");
-				 input = kb.nextLine();
-				playerNames[i] = input;
-				players.add(new Player(playerNames[i]));
-		}
-
-		System.out.println("The following " + numOfPlayer + " Players attend this game:");
-		for (Player player : players) {
-			System.out.println(player.getName());
-		}
-
-		System.out.println("\nGame is loading \n");
-		LadderAndSnake game = new LadderAndSnake(players);
-
-		System.out.println("Please flip Dice to determine players' order!\n");
-		game.orderPlayers();
-		System.out.println("------------------------------------\nThe order of players:");
-		int i = 0;
-		for (Player player : game.getPlayers()) {
-			i++;
-			System.out.println("#" + i + "  " + player.getName());
-		}
-		System.out.println("------------------------------------");
-		System.out.println("Click any key to start playing");
-		kb.nextLine();
-		game.play();
-		kb.close();
-
 	}
 
 }
