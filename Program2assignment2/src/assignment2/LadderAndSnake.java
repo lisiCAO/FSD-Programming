@@ -322,6 +322,7 @@ public class LadderAndSnake {
 	public void orderPlayers() {
 		Map<Integer, List<Player>> diceResultToPlayers = new TreeMap<>(Collections.reverseOrder());
 
+		// the first round of fliping dice
 		for (Player player : players) {
 			dice.startDice(player);
 			int diceResult = dice.roll();
@@ -359,7 +360,7 @@ public class LadderAndSnake {
 				}
 			}
 		} while (hasTie);
-
+		
 		ArrayList<Player> orderedPlayers = new ArrayList<>();
 		for (List<Player> playerList : diceResultToPlayers.values()) {
 			orderedPlayers.addAll(playerList);
