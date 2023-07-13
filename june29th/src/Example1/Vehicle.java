@@ -1,47 +1,48 @@
+
 package Example1;
 
 public class Vehicle {
-	
-	protected int numOfDoor;
-	protected double price;
-	
-	public Vehicle() {//default
-		System.out.println("Creating Vehicle from default");
-		numOfDoor = 4;
+
+	private int numofDoor;
+	private double price;
+
+	public Vehicle() {// default
+		System.out.println("Creating Vehicle from default con");
+		numofDoor = 4;
 		price = 10000;
 	}
-	public Vehicle(int nd, double pr) {//parameter cos
+
+	public Vehicle(int nd, double pr) {// parameter cons
 		System.out.println("Creating Vehicle from parameter con");
-		numOfDoor = nd;
+		numofDoor = nd;
 		price = pr;
 	}
-	public Vehicle(Vehicle v) {//copy
+
+	public Vehicle(Vehicle v) {// copy cons
 		System.out.println("Creating Vehicle from copy con");
-		numOfDoor = v.numOfDoor;
+		numofDoor = v.numofDoor;
 		price = v.price;
 	}
-	
-	public int getNumOfDoor() {
-		return numOfDoor;
+
+	public int getnumDoor() {
+		return numofDoor;
 	}
-	
-	public void setNumOfDoor(int nd) {
-		numOfDoor = nd; 
+
+	public void setNumofdoor(int nd) {
+		numofDoor = nd;
 	}
-	
-	public double getPrice() {
+
+	public double getprice() {
 		return price;
 	}
-	
-	public void setprice(double pr) {
-		price = pr; 
-		}
-	
+
+	public void setPrice(double pr) {
+		price = pr;
+	}
+
 	@Override
 	public String toString() {
-		return "This vehicle has " + numOfDoor + " number of door and the price is " + price + "$";
+		return "this vehicle has" + numofDoor + " number of door and the price is" + price + "$";
 	}
-	
 
 }
-	
