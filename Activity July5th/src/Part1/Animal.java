@@ -1,5 +1,6 @@
 package Part1;
 
+//create an abstract class to define subclass
 public abstract class Animal {
 	protected boolean isMammal;
 	protected boolean isCarivorous;
@@ -9,29 +10,15 @@ public abstract class Animal {
 		this.isCarivorous = isCarvorous;
 	}
 	
-	public boolean getIsMammal() {
+	//getters
+	public boolean isMammal() {
 		return this.isMammal;
 	}
-	public boolean getIsCarvorous() {
+	public boolean isCarvorous() {
 		return this.isCarivorous;
 	};
 	
+	//abstract method
 	public abstract String getGreeting();
 	public abstract String describe();
-	
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		Dog dog = new Dog(true, true);
-		Cow cow = new Cow(true,false);
-		Duck duck = new Duck(false, false);
-		
-		
-		System.out.println(dog.describe());
-		System.out.println(cow.describe());
-		System.out.println(duck.describe());
-		
-	}
-
 }
