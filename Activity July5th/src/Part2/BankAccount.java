@@ -34,7 +34,7 @@ public class BankAccount {
 
 	/** method - deposit money */
 	public void deposit(double depositAmount) throws BankAccountException {
-
+		System.out.println("Client: " + getName() + '\n' + "Balance:" + getbalance());
 		/* invalid amount */
 		if (depositAmount < 0) {
 			throw new InvalidAmountException("The amount you are deposited is negative.");
@@ -44,11 +44,13 @@ public class BankAccount {
 			throw new DepositLimitException("The deposit amount exceed the limit.");
 		} else {
 			balance += depositAmount;
+			System.out.println("Successful deposit! "+ "Current Balance:" + getbalance());
 		}
 	}
 
 	/** withdraw money from the account */
 	public void withdraw(double withdrawAmount) throws BankAccountException {
+		System.out.println("Client: " + getName() + '\n' + "Balance:" + getbalance());
 
 		/* Invalid amount */
 		if (withdrawAmount < 0) {
@@ -63,6 +65,7 @@ public class BankAccount {
 			throw new NotEnoughBalanceException("No enough amount for withdrawal.");
 		} else {
 			balance -= withdrawAmount;
+			System.out.println("Successful withdrawal! "+ "Current Balance:" + getbalance());
 		}
 	}
 }
