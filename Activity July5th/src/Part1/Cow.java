@@ -1,6 +1,7 @@
 package Part1;
 
 public class Cow extends Animal {
+	
 	public Cow(boolean isMammal, boolean isCarnivorous) {
 		super(isMammal, isCarnivorous);
 	}
@@ -14,7 +15,7 @@ public class Cow extends Animal {
 	@Override
 	public String describe() {
 		// TODO Auto-generated method stub
-		return "A cow says '" + getGreeting() + "', is " + (getIsCarvorous() ? "": "not")  + " carnivorous, and is " + (getIsMammal() ? "" : " not") + " a mammal.";
+		return "A cow says '" + getGreeting() + "', is " + (isCarvorous() ? "": "not")  + " carnivorous, and is " + (isMammal() ? "" : " not") + " a mammal.";
 	}
 	}
 

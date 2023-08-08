@@ -15,7 +15,7 @@ public class Duck extends Animal{
 	@Override
 	public String describe() {
 		// TODO Auto-generated method stub
-		return "A duck says '" + getGreeting() + "', is " + (getIsCarvorous() ? "": "not")  + " carnivorous, and is " + (getIsMammal() ? "" : " not") + " a mammal.";
+		return "A duck says '" + getGreeting() + "', is " + (isCarvorous() ? "": "not")  + " carnivorous, and is " + (isMammal() ? "" : " not") + " a mammal.";
 
 	}
 }

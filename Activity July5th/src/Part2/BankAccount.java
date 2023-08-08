@@ -1,61 +1,71 @@
 package Part2;
 
-
 public class BankAccount {
-
-	private String name; // your name
-	private double balance; // current amount of money you save in the bank account
 	private final static double depositLimit = 500;
 	private final static double withdrawLimit = 500;
 
-	
-	/** constructor */
+	private String clientName;
+	private double balance; // current amount saved in the bank account
+
+	/** constructor with name and balance */
 	public BankAccount(String name, double balance) {
-	this.name = name;
-	this.balance = balance;
-	}
-	
-	/** constructor */
-	public BankAccount(String name) {
-	this(name,0);
-	}	
-	
-	/** return balance */
-	public double getbalance() {
-	return balance;
-	}
-	
-	/** return name */
-	public String getName() {
-	return name;
-	}
-	
-	public String toString() {
-		return "Name: " + name + "\n" + "balance: " + balance ;
-		}
-	
-	/** deposit money into the account */
-	public void deposit(double depositAmount) throws BankAccountException {
-	if(depositAmount < 0) {
-		throw new InvalidAmountException("The amount cannot be negative");
-	}else if(depositAmount >depositLimit) {
-		throw new DepositLimitException("The amount exceed the limit");
-	}else {
-		balance += depositAmount;
+		this.clientName = name;
+		this.balance = balance;
 	}
 
+	/** constructor with variable name only */
+	public BankAccount(String name) {
+		this(name, 0);
 	}
+
+	/** return balance & name */
+	public double getbalance() {
+		return balance;
+	}
+
+	public String getName() {
+		return clientName;
+	}
+
+	/** print info */
+	public String toString() {
+		return "Client Name: " + clientName + "\n" + "balance: " + balance;
+	}
+
+	/** method - deposit money */
+	public void deposit(double depositAmount) throws BankAccountException {
+		System.out.println("Client: " + getName() + '\n' + "Balance:" + getbalance());
+		/* invalid amount */
+		if (depositAmount < 0) {
+			throw new InvalidAmountException("The amount you are deposited is negative.");
+		}
+		/* Exceeding limit */
+		else if (depositAmount > depositLimit) {
+			throw new DepositLimitException("The deposit amount exceed the limit.");
+		} else {
+			balance += depositAmount;
+			System.out.println("Successful deposit! "+ "Current Balance:" + getbalance());
+		}
+	}
+
 	/** withdraw money from the account */
 	public void withdraw(double withdrawAmount) throws BankAccountException {
-		if(withdrawAmount < 0) {
-			throw new InvalidAmountException("The amount cannot be negative");
-		}else if(withdrawAmount > withdrawLimit) {
-			throw new DepositLimitException("The amount exceed the limit");
-		}else if(balance < withdrawAmount ) {
-			throw new NotEnoughBalanceException ("The balance is not enough");
+		System.out.println("Client: " + getName() + '\n' + "Balance:" + getbalance());
+
+		/* Invalid amount */
+		if (withdrawAmount < 0) {
+			throw new InvalidAmountException("The withdraw amount is negative.");
 		}
-		else {
+		/* Exceeding limit */
+		else if (withdrawAmount > withdrawLimit) {
+			throw new WithdrawLimitException("The amount exceed the limit");
+		}
+		/* Not enough balance */
+		else if (balance < withdrawAmount) {
+			throw new NotEnoughBalanceException("No enough amount for withdrawal.");
+		} else {
 			balance -= withdrawAmount;
+			System.out.println("Successful withdrawal! "+ "Current Balance:" + getbalance());
 		}
 	}
 }
