@@ -9,44 +9,6 @@ package assignment1;
 import java.util.Objects;
 import java.util.Scanner;
 
-//Password System
-class PasswordSystem {
-	private static final String PASSWORD = "password";
-	private static final int MAX_ATTEMPTS = 3;
-	private int remainingAttempts;
-	private String password;
-
-	public PasswordSystem() {
-		this.remainingAttempts = MAX_ATTEMPTS;
-	}
-
-	// method to prompt user for password
-	public void inputPassword() {
-		password = null;
-		if (remainingAttempts == 0) {
-			System.out.println("You have reached the maximum attempts. \n---return to main menu.---");
-		} else {
-			System.out.println("Please enter your password: ");
-			password = Computer.kb.next();
-		}
-	}
-
-	// method to validate password
-	public boolean validatePassword() {
-
-		while (remainingAttempts > 0) {
-			remainingAttempts--;
-			if (password.equals(PASSWORD)) {
-				return true;
-			} else {
-				System.out.println("Incorrect password. You have " + remainingAttempts + " attempt(s) left.");
-				inputPassword();
-			}
-		}
-		return false;
-	}
-}
-
 //Computer class
 public class Computer {
 	private String brand;
@@ -291,7 +253,7 @@ public class Computer {
 
 	public static void main(String[] args) {
 
-		PasswordSystem checkPassword = new PasswordSystem();// create an Password object
+		Password checkPassword = new Password();// create an Password object
 		System.out.println("Welcome to inventory's system!");// welcome message.
 
 		// prompt the store owner for the max number of computers the store can contain.
@@ -310,10 +272,8 @@ public class Computer {
 				checkPassword.inputPassword();
 				if (!checkPassword.validatePassword()) {
 					continue;
-					// prompt user for numbers of computer to add
+
 				} else {
-					System.out.println("How many computers do you want to add? ");
-					int numOfComputerAdded = kb.nextInt();
 					// check availability of empty space
 					int emptyCount = 0;
 					for (int i = 0; i < inventory.length; i++) {
@@ -321,6 +281,10 @@ public class Computer {
 							emptyCount++;
 						}
 					}
+					// prompt user for numbers of computer to add
+					System.out.println("How many computers do you want to add? ");
+					int numOfComputerAdded = kb.nextInt();
+
 					// compare empty space and numbers to be added
 					if (emptyCount < numOfComputerAdded) {
 						System.out.println(
@@ -331,8 +295,6 @@ public class Computer {
 						System.out.println("You can add " + numOfComputerAdded + " computers.");
 					}
 					addComputer(numOfComputerAdded, inventory); // add information of computer
-					// add information of computer
-					addComputer(numOfComputerAdded, inventory);
 					break;
 				}
 			case 2: // update attributes of computers
