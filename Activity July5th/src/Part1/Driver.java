@@ -1,5 +1,7 @@
-package Part1;
+//Purpose: use Abstract class, inheritance to reduce redundant code. 
+//Author: Lisi Cao
 
+package Part1;
 public class Driver {
 
 	public static void main(String[] args) {
