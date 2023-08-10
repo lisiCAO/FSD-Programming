@@ -24,8 +24,8 @@ out/
 *.iml
 *.iws
 *.prefs
-.classpath
-.project
+*.classpath
+*.project
 .settings/
 
 # System files
