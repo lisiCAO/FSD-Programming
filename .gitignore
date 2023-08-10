@@ -23,6 +23,7 @@ out/
 .idea/
 *.iml
 *.iws
+*.prefs
 .classpath
 .project
 .settings/
@@ -39,4 +40,3 @@ Thumbs.db
 # Other common tools
 bin/
 .gradle/
-.settings/
