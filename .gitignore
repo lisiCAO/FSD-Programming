@@ -39,3 +39,4 @@ Thumbs.db
 # Other common tools
 bin/
 .gradle/
+.settings/
