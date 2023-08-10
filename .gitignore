@@ -39,6 +39,3 @@ Thumbs.db
 # Other common tools
 bin/
 .gradle/
-
-**/.DS_Store
-
