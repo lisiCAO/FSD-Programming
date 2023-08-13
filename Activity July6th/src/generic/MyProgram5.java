@@ -1,4 +1,4 @@
-package activity6thjuly;
+package generic;
 
 import java.util.ArrayList;
 import java.util.Iterator;

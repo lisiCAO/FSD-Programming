@@ -6,7 +6,7 @@
  * 	based on the purpose.
  */
 
-package activity6thjuly;
+package generic;
 
 import java.util.List;
 
