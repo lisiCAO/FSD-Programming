@@ -1,4 +1,4 @@
-package activity6thjuly;
+package generic;
 
 public class MyProgram7 {
 
