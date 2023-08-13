@@ -1,4 +1,4 @@
-package Part1;
+package animal_abstract;
 
 //create an abstract class to define subclass
 public abstract class Animal {

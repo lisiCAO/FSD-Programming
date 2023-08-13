@@ -1,4 +1,4 @@
-package Part2;
+package bank_account_exception;
 
 public class BankAccountException extends Exception{
 	private static final long serialVersionUID = -4448804263089658430L;

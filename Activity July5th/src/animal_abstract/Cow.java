@@ -1,4 +1,4 @@
-package Part1;
+package animal_abstract;
 
 public class Cow extends Animal {
 	

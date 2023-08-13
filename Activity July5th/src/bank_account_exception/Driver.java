@@ -1,12 +1,15 @@
-//Purpose: declare special bank exceptions 
-//Author: Lisi Cao
+/*
+ * Purpose: declare special bank exceptions.
+ * Script date: August, 2023
+ * Author: Lisi Cao 
+ */
 
-package Part2;
+
+package bank_account_exception;
 
 public class Driver {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		/** create two bank account objects */
 		BankAccount account = new BankAccount("lisi", 6000);
@@ -60,13 +63,14 @@ public class Driver {
 		}
 
 		System.out.println("**************************** \n");
+
 		/** test6: deposit 200 to account 2 */
 		try {
 			account2.deposit(200);
 		} catch (BankAccountException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
-		
+
 		System.exit(0);
 	}
 
