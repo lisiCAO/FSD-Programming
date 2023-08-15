@@ -10,47 +10,39 @@ import java.util.List;
 
 //Inner class to store result of calculation.
 class Result {
-	private int sumEven;
-	private int sumOdd;
+	private final int sumEven;
+	private final int sumOdd;
 
 	public Result(int sumEven, int sumOdd) {
-		this.setSumEven(sumEven);
-		this.setSumOdd(sumOdd);
+		this.sumEven = sumEven;
+		this.sumOdd = sumOdd;
 	}
 
 	public int getSumOdd() {
 		return sumOdd;
 	}
 
-	public void setSumOdd(int sumOdd) {
-		this.sumOdd = sumOdd;
-	}
-
 	public int getSumEven() {
 		return sumEven;
-	}
-
-	public void setSumEven(int sumEven) {
-		this.sumEven = sumEven;
 	}
 }
 
 public class SumCalculator {
+	private SumCalculator() {
+	}; // private constructor to prevent instantiation
+
 	/**
-	 * limit List() to Integer return sum of even and sum of odd in an array
+	 * Only calculate integer in the list of number
 	 */
-	public static <T extends Number> Result CalSumOfEvenOrOdd(List<T> numbers) {
+	public static <T extends Number> Result CalSumOfEvenAndOdd(List<T> numbers) {
 		int evenSum = 0;
 		int oddSum = 0;
-		for (T number : numbers) {
 
+		for (T number : numbers) {
 			if (number.doubleValue() == number.intValue()) { // Check if the number is essentially an integer
-				// An even number divided by two leaves a remainder of zero.
 				if (number.intValue() % 2 == 0) {
 					evenSum += number.intValue();
-				}
-				// an integer is either even, or odd.
-				else {
+				} else {
 					oddSum += number.intValue();
 				}
 			}
@@ -59,19 +51,14 @@ public class SumCalculator {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		// generate a list of integer number.
+		// generate a list of number including both double and integer.
 		List<Number> numbers = List.of(1, 2, 3.5, 4.0, 5, 6, 7.1, 8, 9.9, 10);
 		System.out.println("The list of numbers generated: " + numbers);
 
-		// call the method CalSumOfEevnOrOdd, and assign values to object result
-		Result result = CalSumOfEvenOrOdd(numbers);
+		Result result = CalSumOfEvenAndOdd(numbers);
 
-		// print results clearly
 		System.out.println("The sum of even numver: " + result.getSumEven());
 		System.out.println("The sum of odd numver: " + result.getSumOdd());
-
 	}
-
 }

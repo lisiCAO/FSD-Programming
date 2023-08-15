@@ -1,3 +1,12 @@
+/*
+ * Purpose:  create a generic method that takes a list of any type and a target element. 
+ * It returns the index of the first occurrence of the target element in the list. 
+ * Return -1 if the target element cannot be found.
+ * Script date: August 14, 2023
+ * Author: Lisi Cao
+ */
+
+
 package generic;
 
 import java.util.Arrays;
