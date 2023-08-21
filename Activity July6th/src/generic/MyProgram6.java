@@ -1,3 +1,9 @@
+/*
+ * Purpose: takes a list of any type and a predicate. It returns an array list containing only elements that satisfy the predicate.
+ * This method alternates the elements of each list.
+ * Script Date: August 16, 2023
+ * Developed by: Lisi Cao
+ */
 package generic;
 
 import java.util.List;
