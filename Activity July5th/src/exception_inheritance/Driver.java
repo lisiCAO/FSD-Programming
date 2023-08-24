@@ -5,7 +5,7 @@
  */
 
 
-package bank_account_exception;
+package exception_inheritance;
 
 public class Driver {
 
