@@ -1,4 +1,4 @@
-package bank_account_exception;
+package exception_inheritance;
 
 public class BankAccount {
 	private final static double depositLimit = 500;
