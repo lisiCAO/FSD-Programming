@@ -27,6 +27,7 @@ out/
 *.classpath
 *.project
 .settings/
+.vscode/
 
 # System files
 .DS_Store
