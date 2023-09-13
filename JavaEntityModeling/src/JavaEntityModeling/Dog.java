@@ -1,3 +1,7 @@
+package JavaEntityModeling;
+
+import java.util.Objects;
+
 /**
  * The `Dog` class represents a dog with a name and breed.
  * 
@@ -8,11 +12,6 @@
  * @version 2.0
  * @since September 10, 2023
  */
-
-
-package JavaEntityModeling;
-
-import java.util.Objects;
 
 /**
  * Represents a Dog with attributes for name and breed.
