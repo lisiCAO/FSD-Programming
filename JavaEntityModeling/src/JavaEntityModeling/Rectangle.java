@@ -1,4 +1,4 @@
-package activity28thJune;
+package JavaEntityModeling;
 
 public class Rectangle {
 	private double width;

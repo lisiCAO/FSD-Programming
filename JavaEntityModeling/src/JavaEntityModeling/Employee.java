@@ -1,4 +1,4 @@
-package activity28thJune;
+package JavaEntityModeling;
 import java.time.LocalDate;
 import java.time.Period;
 public class Employee {

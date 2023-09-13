@@ -1,4 +1,4 @@
-package activity28thJune;
+package JavaEntityModeling;
 
 public class Circle {
 	private double radius; // create an attribute radius

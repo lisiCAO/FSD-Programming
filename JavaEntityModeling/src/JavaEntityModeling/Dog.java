@@ -10,7 +10,7 @@
  */
 
 
-package activity28thJune;
+package JavaEntityModeling;
 
 import java.util.Objects;
 

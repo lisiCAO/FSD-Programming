@@ -1,4 +1,4 @@
-package activity28thJune;
+package JavaEntityModeling;
 import java.util.ArrayList;  //import ArrayList to store accounts, avoiding limits of the size
 public class Bank {
 	
