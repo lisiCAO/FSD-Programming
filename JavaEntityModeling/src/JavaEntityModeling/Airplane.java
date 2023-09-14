@@ -1,4 +1,4 @@
-package activity28thJune;
+package JavaEntityModeling;
 import java.time.LocalDateTime;
 public class Airplane {
 	private String flightNumber;
