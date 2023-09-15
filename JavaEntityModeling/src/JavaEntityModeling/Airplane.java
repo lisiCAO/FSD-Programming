@@ -1,16 +1,33 @@
 package JavaEntityModeling;
 import java.time.LocalDateTime;
+
+/**
+ * The class "Airplane" has a flight number, destination, and departure time
+ * attributes,
+ * 
+ * and methods to check flight status and delay.
+ * 
+ * @author Lisi Cao
+ * @version 2.0
+ * @since September 15, 2023
+ */
+
 public class Airplane {
 	private String flightNumber;
 	private String destination;
 	private LocalDateTime departureTime;
-	private String status;
+	private FlightStatus status;
+	
+    // Enum for FlightStatus
+    private enum FlightStatus {
+        ON_TIME, DELAYED
+    }
 	
 	public Airplane(String fNum, String destination, LocalDateTime departureTime) {
 		this.flightNumber = fNum;
 		this.destination = destination;
 		this.departureTime = departureTime;
-		this.status = "on time";
+		this.status = status;
 	}
 	
 	public String getFlightNumber() {
