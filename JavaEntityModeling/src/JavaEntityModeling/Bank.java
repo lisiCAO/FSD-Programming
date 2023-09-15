@@ -74,9 +74,9 @@ public class Bank {
 		Bank bank = new Bank();
 
 		// 创建账户
-		Account alice = new Account.Builder().clientName("Alice").accountNumber("001").balance(1000).build();
-		Account bob = new Account.Builder().clientName("Bob").accountNumber("002").balance(500).build();
-		Account charlie = new Account.Builder().clientName("Charlie").accountNumber("003").balance(0).build();
+		Account alice = new Account.Builder("Alice").accountNumber("001").balance(1000).build();
+		Account bob = new Account.Builder("Bob").accountNumber("002").balance(500).build();
+		Account charlie = new Account.Builder("Charlie").accountNumber("003").balance(0).build();
 
 		bank.addAccount(alice);
 		bank.addAccount(bob);
@@ -163,9 +163,8 @@ class Account {
 		private String accountNumber;
 		private double balance;
 
-		public Builder clientName(String clientName) {
+		public Builder(String clientName) {
 			this.clientName = clientName;
-			return this;
 		}
 
 		public Builder accountNumber(String accountNumber) {
