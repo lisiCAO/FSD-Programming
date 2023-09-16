@@ -17,7 +17,7 @@ This project offers a way to define entities in Java in a structured manner. Eac
 
 1. Clone the repository:
 ```bash
-git clone [URL-to-your-repo]
+git clone https://github.com/lisiCAO/FSD-Programming.git
 ```
 2. Navigate to the project directory:
 ```bash
@@ -39,7 +39,7 @@ Contributions are welcome! For major changes, please open an issue first. Make a
 
 ## Author
 
-- **[Lisi Cao]** - Initial creation and ongoing development.
+- **Lisi Cao** - Initial creation and ongoing development.
 
 ## License
 
