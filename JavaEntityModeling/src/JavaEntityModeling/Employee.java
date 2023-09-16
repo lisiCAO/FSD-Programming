@@ -71,7 +71,7 @@ public class Employee {
 		private LocalDate hireDate;
 		private double salary;
 
-		public Builder(String name) {
+		protected Builder(String name) {
 			this.name = name;
 		}
 
