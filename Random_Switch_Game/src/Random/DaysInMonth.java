@@ -1,23 +1,22 @@
-package Lisi;
+package Random;
 
 import java.util.Scanner;
 
-public class Part2 {
+public class DaysInMonth {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Scanner kb = new Scanner(System.in);
-		System.out.println("Enter the month : ");
-		int month = kb.nextInt();
-		System.out.println("Enter the year : ");
-		int year = kb.nextInt();
-
+	/**
+	 * Return the number of dates for the selected month.
+	 * @param year
+	 * @param month
+	 * @return String 
+	 */
+	public static void printDaysInMonth(int year, int month) {
 		switch (month) {
 		case 1:
 			System.out.println("January " + year + " had 31 days.");
 			break;
 		case 2:
-			if (year % 4 == 0 || year % 400 == 0) {
+			if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
 				System.out.println("February " + year + " had 29 days.");
 			} else {
 				System.out.println("February " + year + " had 28 days.");
@@ -57,7 +56,17 @@ public class Part2 {
 			System.out.println("Please enter a valid month");
 			return;
 		}
-
 	}
 
+
+	public static void main(String[] args) {
+		Scanner kb = new Scanner(System.in);
+		System.out.println("Enter the month : ");
+		int month = kb.nextInt();
+		System.out.println("Enter the year : ");
+		int year = kb.nextInt();
+		printDaysInMonth(year, month);
+		kb.close();
+		System.exit(0);
+	}
 }
