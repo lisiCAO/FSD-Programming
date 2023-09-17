@@ -24,9 +24,9 @@ public class MyProgram3 {
 		}
 		
 		
-		System.out.println("here is the info inyour file");
+		System.out.println("here is the info in your file");
 		
-		System.out.println("first studnets id : ");
+		System.out.println("First studnets id : ");
 		id1 = sc.nextLong();
 		System.out.println(id1);
 		s = sc.nextLine();
