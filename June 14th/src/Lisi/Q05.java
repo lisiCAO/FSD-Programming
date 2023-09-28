@@ -1,4 +1,5 @@
 package Lisi;
+// Write a program to solve quadratic equations with 3 variables get from users. 
 
 import java.util.Scanner;
 

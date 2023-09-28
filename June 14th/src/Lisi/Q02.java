@@ -1,5 +1,6 @@
 package Lisi;
-
+//Take values of length and breadth of a rectangle from the users and check if it is
+//square or not.
 import java.util.Scanner;
 
 public class Q02 {
