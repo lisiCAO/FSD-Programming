@@ -1,5 +1,66 @@
 package Lisi;
+/*
+Print the following patterns using loop getting the number of line from user:
+a.
+     5
+     45
+     345
+     2345
+     12345
+ Write a program to convert temperature from Fahrenheit to Celsius degree getting
+ the values from users.
+ Write a program that takes three numbers as input to calculate and print the
+ average of the numbers.
+2
+b. 5 54
+   543
+   5432
+   54321
+c.
+1
+   12
+   123
+   1234
+   12345
+   123456
+d.
+ ***** **** ***
+** *
+ d.
+ * ** ***
+**** *****
+ **** *** **
+*
+3
 
+e.
+***** **** ***
+**
+*
+* ** ***
+**** *****
+f.
+g. (it should be odd number)
+1
+23 456
+7 8 9 10
+11 12 13 14 15
+1 212
+ 32123
+4321234
+32123 212
+1
+h. (it should be odd number)
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+*/
 public class Q11 {
 
 	public static void main(String[] args) {

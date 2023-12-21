@@ -1,4 +1,5 @@
 package Lisi;
+// Write the program to print the factorial number of the value getting from user?
 
 import java.util.Scanner;
 

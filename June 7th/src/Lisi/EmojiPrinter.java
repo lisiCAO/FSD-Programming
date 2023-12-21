@@ -1,14 +1,16 @@
 package Lisi;
 
-public class MyProgram7 {
+public class EmojiPrinter {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		printEmoji();
+	}
+
+	private static void printEmoji() {
 		System.out.println(" +\"\"\"\"\"+");
 		System.out.println("[| o o |]");
 		System.out.println(" |  ^  |");
 		System.out.println(" | '-' |");
 		System.out.println(" +-----+");
 	}
-
 }

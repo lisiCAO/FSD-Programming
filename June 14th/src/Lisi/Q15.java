@@ -1,5 +1,19 @@
 package Lisi;
-
+/*
+ * Write a program to accept a grade and declare the equivalent description :
+Grade
+Description
+E
+Excellent
+V
+Very Good
+G
+Good
+A
+Average
+F
+Fail
+ */
 import java.util.Scanner;
 
 public class Q15 {

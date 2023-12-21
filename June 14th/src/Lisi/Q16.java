@@ -1,5 +1,8 @@
 package Lisi;
+/*
+ * Write a method that print 10 by 10 multiplication table. Make it readable
 
+ */
 public class Q16 {
 
 	public static void main(String[] args) {

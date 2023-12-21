@@ -1,5 +1,5 @@
 package Lisi;
-
+// Write the code to print Fibonacci numbers until 300.
 public class Q06 {
 
 	public static void main(String[] args) {

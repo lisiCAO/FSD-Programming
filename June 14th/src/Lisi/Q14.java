@@ -1,5 +1,8 @@
 package Lisi;
 
+/*
+ * Write a program to read n numbers from keyboard and find their sum and average
+ */
 import java.util.Scanner;
 
 public class Q14 {

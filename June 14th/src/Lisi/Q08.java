@@ -1,7 +1,8 @@
 package Lisi;
 
 import java.util.Scanner;
-
+//Write a program to convert temperature from Fahrenheit to Celsius degree getting
+//the values from users
 public class Q08 {
 
 	public static void main(String[] args) {
